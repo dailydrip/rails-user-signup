@@ -9,6 +9,33 @@
   </head>
 
   <body>
-    <%= yield %>
+
+    <nav class="lighten-1" role="navigation">
+      <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">My System</a>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+          <% if user_signed_in? %>
+            <li><a href="#">Menu 1</a></li>
+            <li><a href="#">Menu 2</a></li>
+            <li><a href="#">Menu 3</a></li>
+          <% end %>
+          <li>
+            <% if user_signed_in? %>
+              <%= link_to "Logout", destroy_user_session_path, :method => :delete %>
+            <% else %>
+              <%= link_to new_user_session_path do %>
+                Sign in
+              <% end %>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="card-panel z-depth-4">
+        <%= yield %>
+      </div>
+    </div>
   </body>
 </html>
